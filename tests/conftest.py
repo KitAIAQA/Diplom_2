@@ -3,7 +3,7 @@ import requests
 from helpers.api_requests import get_access_token, delete_user
 from helpers.user_helpers import generate_user_data
 
-from data import ENDPOINTS
+from data.data import ENDPOINTS
 
 @pytest.fixture
 def setup_unique_user():

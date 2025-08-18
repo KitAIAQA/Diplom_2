@@ -1,6 +1,6 @@
 import allure
 from helpers.api_requests import login_user
-from data import EXISTING_USER, INVALID_USER
+from data.data import EXISTING_USER, INVALID_USER
 
 @allure.feature('Авторизация пользователя')
 @allure.story('Тестирование различных сценариев авторизации')

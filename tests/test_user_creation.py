@@ -1,6 +1,7 @@
+import pytest
 import allure
 from helpers.api_requests import login_user, get_user_data, register_user
-from data import EXISTING_USER, MISSING_FIELDS_USER
+from data.data import EXISTING_USER, MISSING_FIELDS_PASSWORD_USER, MISSING_FIELDS_EMAIL_USER, MISSING_FIELDS_NAME_USER, TEST_DATA
 
 @allure.feature("Создание пользователя")
 @allure.story("Тестирование создания пользователей с различными условиями")
@@ -39,17 +40,22 @@ class TestUserCreation:
         assert response.json() == expected_response, \
             f"Ожидался ответ {expected_response}, получен: {response.json()}"
 
-    @allure.title("Тест создания пользователя с отсутствующими обязательными полями")
-    def test_create_user_missing_fields(self):
-        incomplete_user = MISSING_FIELDS_USER.copy()
-        incomplete_user["password"] = ""  # Убираем обязательное поле
-        response = register_user(incomplete_user)
+    @pytest.mark.parametrize("user_data, missing_field", TEST_DATA)
+    @allure.title("Тест создания пользователя с отсутствующим обязательным полем")
+    def test_create_user_missing_fields(self, user_data, missing_field):
+        response = register_user(user_data)
 
-        assert response.status_code == 403, \
-            f"Ожидался код 403, получен {response.status_code}. Ответ: {response.text}"
+        assert response.status_code == 403, (
+            f"Ожидался код 403, получен {response.status_code}. "
+            f"Ответ: {response.text}"
+        )
+
         expected_response = {
             "success": False,
             "message": "Email, password and name are required fields"
         }
-        assert response.json() == expected_response, \
-            f"Ожидался ответ {expected_response}, получен: {response.json()}"
+
+        assert response.json() == expected_response, (
+            f"Ожидался ответ {expected_response}, "
+            f"получен: {response.json()}"
+        )

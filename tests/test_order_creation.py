@@ -1,5 +1,5 @@
 import allure
-from data import INGREDIENTS, EXISTING_USER
+from data.data import INGREDIENTS, EXISTING_USER
 from helpers.api_requests import create_order
 
 @allure.feature("Создание заказа")

@@ -15,11 +15,29 @@ EXISTING_USER = {
     "name": "Алёна"
 }
 
-MISSING_FIELDS_USER = {
+MISSING_FIELDS_PASSWORD_USER = {
     "email": "Ghjnng@yandex.ru",
     "password": "",
     "name": "Светозар"
 }
+
+MISSING_FIELDS_EMAIL_USER = {
+    "email": "",
+    "password": "321335464",
+    "name": "Светозар"
+}
+
+MISSING_FIELDS_NAME_USER = {
+    "email": "Ghjnng@yandex.ru",
+    "password": "321335464",
+    "name": ""
+}
+
+TEST_DATA = [
+    (MISSING_FIELDS_PASSWORD_USER, "password"),
+    (MISSING_FIELDS_EMAIL_USER, "email"),
+    (MISSING_FIELDS_NAME_USER, "name")
+]
 
 INVALID_USER = {
     "email": "Jfdcc@yandex.ru",

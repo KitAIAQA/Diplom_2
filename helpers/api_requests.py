@@ -1,6 +1,6 @@
 import requests
 import allure
-from data import ENDPOINTS
+from data.data import ENDPOINTS
 
 @allure.step("Регистрация пользователя")
 def register_user(user_data):
